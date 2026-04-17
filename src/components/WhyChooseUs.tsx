@@ -83,7 +83,7 @@ export default function WhyChooseUs({ openBooking }: { openBooking: () => void }
             <div className="flex justify-start">
               <button 
                 onClick={openBooking} 
-                className="inline-flex items-center justify-center px-8 py-4 bg-transparent border-2 border-brand-primary text-brand-primary-dark font-medium rounded-full hover:bg-brand-primary transition-colors shadow-sm w-full sm:w-auto"
+                className="inline-flex items-center justify-center px-6 md:px-8 py-3 md:py-4 bg-transparent border-2 border-brand-primary text-brand-primary-dark font-medium rounded-full hover:bg-brand-primary hover:text-white transition-colors shadow-sm w-full sm:w-auto text-sm md:text-base"
               >
                 Schedule a Consultation
               </button>

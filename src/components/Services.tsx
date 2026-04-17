@@ -134,7 +134,7 @@ export default function Services() {
     const scroll = () => {
       if (!isDown) {
         // Adjust the numeric value (0.8) to make it faster or slower
-        el.scrollLeft += 1.5; 
+        el.scrollLeft += 0.50; 
         
         // Loop when hitting a threshold
         // By using multiplied items, we just reset scroll when we are 1/3 deep

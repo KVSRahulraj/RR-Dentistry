@@ -31,12 +31,12 @@ export default function Header({ openBooking }: { openBooking: () => void }) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">
           {/* Logo */}
-          <div className={`flex items-center gap-4 ${textColor} transition-colors duration-300`}>
-            <svg width="24" height="32" viewBox="0 0 24 32" className="fill-current">
+          <div className={`flex items-center gap-3 md:gap-4 ${textColor} transition-colors duration-300`}>
+            <svg width="24" height="32" viewBox="0 0 24 32" className="fill-current w-5 h-6 md:w-6 md:h-8">
               <circle cx="4" cy="28" r="4"/>
               <polygon points="6,0 14,0 22,32 14,32"/>
             </svg>
-            <span className="font-bold text-xl tracking-[0.3em] uppercase">
+            <span className="font-bold text-base md:text-xl tracking-[0.2em] md:tracking-[0.3em] uppercase">
               RR Dentistry
             </span>
           </div>
@@ -77,27 +77,29 @@ export default function Header({ openBooking }: { openBooking: () => void }) {
             <a href="#contact" className={`${textColor} ${hoverColor} font-medium transition-colors text-sm uppercase tracking-wider`}>Contact</a>
           </nav>
 
-          {/* Right Side: CTA */}
-          <div className="hidden md:flex items-center gap-6">
+          <div className="flex items-center gap-4">
+            {/* Right Side: CTA */}
+            <div className="hidden md:flex items-center">
+              <button 
+                onClick={openBooking}
+                className={`px-5 lg:px-8 py-2.5 lg:py-3 rounded-full border-2 transition-all duration-300 text-xs lg:text-sm font-bold tracking-wide shadow-sm hover:shadow-md whitespace-nowrap ${
+                  isScrolled 
+                    ? 'border-brand-primary bg-brand-primary text-white hover:bg-brand-primary-dark hover:border-brand-primary-dark' 
+                    : 'border-white bg-white text-brand-primary-dark hover:bg-white/90 hover:border-white/90'
+                }`}
+              >
+                Book Appointment
+              </button>
+            </div>
+
+            {/* Mobile Toggle */}
             <button 
-              onClick={openBooking}
-              className={`px-8 py-3 rounded-full border-2 transition-all duration-300 text-sm font-bold tracking-wide shadow-sm hover:shadow-md ${
-                isScrolled 
-                  ? 'border-brand-primary bg-brand-primary text-white hover:bg-brand-primary-dark hover:border-brand-primary-dark' 
-                  : 'border-white bg-white text-brand-primary-dark hover:bg-white/90 hover:border-white/90'
-              }`}
+              className={`lg:hidden p-2 ${textColor} transition-colors duration-300`}
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
-              Book Appointment
+              {isMobileMenuOpen ? <X /> : <Menu />}
             </button>
           </div>
-
-          {/* Mobile Toggle */}
-          <button 
-            className={`lg:hidden p-2 ${textColor} transition-colors duration-300`}
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          >
-            {isMobileMenuOpen ? <X /> : <Menu />}
-          </button>
         </div>
       </div>
 

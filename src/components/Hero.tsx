@@ -11,7 +11,7 @@ export default function Hero() {
   const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
 
   return (
-    <section ref={ref} className="relative h-screen w-full overflow-hidden bg-brand-bg">
+    <section ref={ref} className="relative h-[100dvh] w-full overflow-hidden bg-brand-bg">
       {/* Background Image with Parallax */}
       <motion.div style={{ y }} className="absolute inset-0 w-full h-[120%] -top-[10%] bg-brand-primary-dark">
         <picture className="absolute inset-0 w-full h-full">
@@ -19,17 +19,17 @@ export default function Hero() {
           <img 
             src="https://drive.google.com/thumbnail?id=17O13HUSy_Q4kdrEkIixz620jcKwcbj9h&sz=w1000" 
             alt="RR Dentistry Hero" 
-            className="w-full h-full object-cover object-center" 
+            className="w-full h-full object-cover object-[center_15%] md:object-center" 
             referrerPolicy="no-referrer" 
           />
         </picture>
       </motion.div>
 
       {/* Subtle Overlay for text readability */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/60"></div>
+      <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/80"></div>
 
       {/* Text Content */}
-      <div className="absolute bottom-[5%] md:bottom-[20%] lg:bottom-[12%] left-0 right-0 z-10">
+      <div className="absolute bottom-8 md:bottom-[15%] lg:bottom-[10%] left-0 right-0 z-10 w-full">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center lg:items-start text-center lg:text-left">
           {/* Rounded Box with Continuous Lighting */}
           <motion.div 
@@ -37,7 +37,7 @@ export default function Hero() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="relative inline-flex mb-6 lg:mb-10 rounded-full shadow-lg"
+            className="relative inline-flex mb-4 md:mb-6 lg:mb-10 rounded-full shadow-lg"
           >
             {/* Animated Border Layer */}
             <div className="absolute -inset-[3px] rounded-full overflow-hidden">
@@ -45,15 +45,15 @@ export default function Hero() {
             </div>
             
             {/* Inner Content Layer */}
-            <div className="relative px-6 py-2 md:px-8 md:py-3 lg:px-10 lg:py-4 rounded-full bg-black/60 backdrop-blur-xl border border-white/10 flex items-center justify-center shadow-[inset_0_0_20px_rgba(0,0,0,0.6)]">
-              <span className="text-lg md:text-2xl lg:text-4xl font-medium text-[#f5d0c5] tracking-wide drop-shadow-lg">
+            <div className="relative px-5 py-2 md:px-8 md:py-3 lg:px-10 lg:py-4 rounded-full bg-black/60 backdrop-blur-xl border border-white/10 flex items-center justify-center shadow-[inset_0_0_20px_rgba(0,0,0,0.6)]">
+              <span className="text-base sm:text-lg md:text-2xl lg:text-4xl font-medium text-[#f5d0c5] tracking-wide drop-shadow-lg">
                 Dentistry
               </span>
             </div>
           </motion.div>
           
           {/* Main Text */}
-          <h1 className="text-5xl md:text-7xl lg:text-[110px] text-white leading-[1.1] tracking-tight drop-shadow-2xl">
+          <h1 className="text-[2.75rem] leading-[1.05] sm:text-5xl md:text-7xl lg:text-[110px] text-white tracking-tight drop-shadow-2xl">
             <motion.span 
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -63,7 +63,7 @@ export default function Hero() {
             >
               CRAFTING
             </motion.span>{' '}
-            <br className="hidden md:block" />
+            <br className="hidden md:block lg:hidden" />
             <motion.span 
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -79,7 +79,7 @@ export default function Hero() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, ease: "easeOut", delay: 0.6 }}
-            className="mt-6 text-lg md:text-2xl text-gray-100 max-w-2xl drop-shadow-md font-light"
+            className="mt-3 md:mt-6 text-[15px] sm:text-lg md:text-2xl text-gray-100 max-w-2xl drop-shadow-md font-light"
           >
             Experience world-class dentistry in Hyderabad with our expert team and state-of-the-art facilities.
           </motion.p>
