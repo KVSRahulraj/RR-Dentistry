@@ -1,10 +1,13 @@
 import { useState, useEffect } from 'react';
 import { Menu, X, ChevronDown } from 'lucide-react';
+import { Link, useLocation } from 'react-router-dom';
+import { servicesData } from '../data/servicesData';
 
 export default function Header({ openBooking }: { openBooking: () => void }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isServicesOpen, setIsServicesOpen] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -16,18 +19,15 @@ export default function Header({ openBooking }: { openBooking: () => void }) {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const services = [
-    "Cosmetic Dentistry", "Dental Implants", "Root Canal Treatment",
-    "Wisdom Teeth Extraction", "Kids Dentistry", "Orthodontics",
-    "Teeth Whitening", "Dental Cleaning", "Full Mouth Rehabilitation", "Jaw Pain Treatment"
-  ];
-
+  const isHome = location.pathname === '/';
   const isTop = !isScrolled;
-  const textColor = isTop ? 'text-white' : 'text-brand-primary-dark';
-  const hoverColor = isTop ? 'hover:text-white/80' : 'hover:text-brand-primary';
+  const isTransparent = isHome && isTop;
+
+  const textColor = isTransparent ? 'text-white' : 'text-brand-primary-dark';
+  const hoverColor = isTransparent ? 'hover:text-white/80' : 'hover:text-brand-primary';
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled ? 'bg-white/95 backdrop-blur-lg shadow-sm border-b border-gray-100 py-3' : 'bg-transparent py-5 lg:py-6'}`}>
+    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${!isTransparent ? 'bg-white/95 backdrop-blur-lg shadow-sm border-b border-gray-100 py-3' : 'bg-transparent py-5 lg:py-6'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">
           {/* Logo */}
@@ -42,7 +42,7 @@ export default function Header({ openBooking }: { openBooking: () => void }) {
           </div>
 
           {/* Desktop Navigation */}
-          <nav className={`hidden lg:flex items-center gap-8 rounded-full px-8 py-3 transition-all duration-300 ${isTop ? 'bg-white/10 backdrop-blur-md border border-white/20' : ''}`}>
+          <nav className={`hidden lg:flex items-center gap-8 rounded-full px-8 py-3 transition-all duration-300 ${isTransparent ? 'bg-white/10 backdrop-blur-md border border-white/20' : ''}`}>
             <a href="#" className={`${textColor} ${hoverColor} font-medium transition-colors text-sm uppercase tracking-wider`}>Home</a>
             <a href="#about" className={`${textColor} ${hoverColor} font-medium transition-colors text-sm uppercase tracking-wider`}>About</a>
             
@@ -58,16 +58,16 @@ export default function Header({ openBooking }: { openBooking: () => void }) {
               
               {/* Mega Menu Dropdown */}
               <div 
-                className={`absolute top-full left-1/2 -translate-x-1/2 mt-4 w-[600px] ${isTop ? 'bg-white/10 border-white/20' : 'bg-white border-gray-100'} backdrop-blur-lg rounded-2xl shadow-xl border p-6 transition-all duration-200 origin-top ${isServicesOpen ? 'opacity-100 scale-100 visible' : 'opacity-0 scale-95 invisible'}`}
+                className={`absolute top-full left-1/2 -translate-x-1/2 mt-4 w-[600px] ${isTransparent ? 'bg-white/10 border-white/20' : 'bg-white border-gray-100'} backdrop-blur-lg rounded-2xl shadow-xl border p-6 transition-all duration-200 origin-top ${isServicesOpen ? 'opacity-100 scale-100 visible' : 'opacity-0 scale-95 invisible'}`}
                 onMouseEnter={() => setIsServicesOpen(true)}
                 onMouseLeave={() => setIsServicesOpen(false)}
               >
                 <div className="grid grid-cols-2 gap-x-8 gap-y-4">
-                  {services.map((service, idx) => (
-                    <a key={idx} href="#services" className={`flex items-center gap-3 p-2 rounded-lg transition-colors group/item ${isTop ? 'hover:bg-white/10' : 'hover:bg-gray-50'}`}>
-                      <div className={`w-2 h-2 rounded-full transition-colors ${isTop ? 'bg-white/40 group-hover/item:bg-white' : 'bg-brand-primary-dark/30 group-hover/item:bg-brand-primary-dark'}`}></div>
-                      <span className={`text-sm font-medium transition-colors ${isTop ? 'text-white/90 group-hover/item:text-white' : 'text-gray-800 group-hover/item:text-brand-primary-dark'}`}>{service}</span>
-                    </a>
+                  {servicesData.map((service) => (
+                    <Link key={service.id} to={`/services/${service.id}`} className={`flex items-center gap-3 p-2 rounded-lg transition-colors group/item ${isTransparent ? 'hover:bg-white/10' : 'hover:bg-gray-50'}`} onClick={() => setIsServicesOpen(false)}>
+                      <div className={`w-2 h-2 rounded-full transition-colors ${isTransparent ? 'bg-white/40 group-hover/item:bg-white' : 'bg-brand-primary-dark/30 group-hover/item:bg-brand-primary-dark'}`}></div>
+                      <span className={`text-sm font-medium transition-colors ${isTransparent ? 'text-white/90 group-hover/item:text-white' : 'text-gray-800 group-hover/item:text-brand-primary-dark'}`}>{service.title}</span>
+                    </Link>
                   ))}
                 </div>
               </div>
@@ -83,7 +83,7 @@ export default function Header({ openBooking }: { openBooking: () => void }) {
               <button 
                 onClick={openBooking}
                 className={`px-5 lg:px-8 py-2.5 lg:py-3 rounded-full border-2 transition-all duration-300 text-xs lg:text-sm font-bold tracking-wide shadow-sm hover:shadow-md whitespace-nowrap ${
-                  isScrolled 
+                  !isTransparent 
                     ? 'border-brand-primary bg-brand-primary text-white hover:bg-brand-primary-dark hover:border-brand-primary-dark' 
                     : 'border-white bg-white text-brand-primary-dark hover:bg-white/90 hover:border-white/90'
                 }`}
@@ -114,8 +114,10 @@ export default function Header({ openBooking }: { openBooking: () => void }) {
               Services <ChevronDown className={`w-5 h-5 transition-transform ${isServicesOpen ? 'rotate-180' : ''}`} />
             </div>
             <div className={`pl-4 flex flex-col gap-2 overflow-hidden transition-all ${isServicesOpen ? 'max-h-[500px]' : 'max-h-0'}`}>
-              {services.map((service, idx) => (
-                <a key={idx} href="#services" className="text-gray-600 py-1" onClick={() => setIsMobileMenuOpen(false)}>{service}</a>
+              {servicesData.map((service) => (
+                <Link key={service.id} to={`/services/${service.id}`} className="text-gray-600 py-1" onClick={() => setIsMobileMenuOpen(false)}>
+                  {service.title}
+                </Link>
               ))}
             </div>
           </div>

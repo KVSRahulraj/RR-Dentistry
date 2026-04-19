@@ -37,16 +37,14 @@ export default function Hero() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="relative inline-flex mb-4 md:mb-6 lg:mb-10 rounded-full shadow-lg"
+            className="relative inline-flex mb-4 md:mb-6 lg:mb-10 rounded-full p-[2px] overflow-hidden shadow-lg"
           >
             {/* Animated Border Layer */}
-            <div className="absolute -inset-[3px] rounded-full overflow-hidden">
-              <div className="absolute inset-[-1000%] animate-[spin_3s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,transparent_0%,transparent_20%,rgb(146,100,100)_40%,rgb(255,180,180)_50%,rgb(146,100,100)_60%,transparent_80%,transparent_100%)]" />
-            </div>
+            <div className="absolute inset-[-1000%] animate-[spin_3s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,transparent_0%,transparent_20%,rgb(255,180,180)_50%,transparent_80%,transparent_100%)] opacity-70" />
             
             {/* Inner Content Layer */}
-            <div className="relative px-5 py-2 md:px-8 md:py-3 lg:px-10 lg:py-4 rounded-full bg-black/60 backdrop-blur-xl border border-white/10 flex items-center justify-center shadow-[inset_0_0_20px_rgba(0,0,0,0.6)]">
-              <span className="text-base sm:text-lg md:text-2xl lg:text-4xl font-medium text-[#f5d0c5] tracking-wide drop-shadow-lg">
+            <div className="relative w-full h-full px-5 py-2 md:px-8 md:py-3 lg:px-10 lg:py-4 rounded-full bg-black/60 backdrop-blur-xl border border-white/5 flex items-center justify-center">
+              <span className="text-base sm:text-lg md:text-2xl lg:text-4xl font-medium text-[#f5d0c5] tracking-wide drop-shadow-lg relative z-10">
                 Dentistry
               </span>
             </div>

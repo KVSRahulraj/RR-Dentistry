@@ -1,7 +1,9 @@
 import { useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 
 const services = [
   {
+    id: "single-visit-crowns",
     title: "Single Visit Crowns",
     icon: (
       <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-20 h-20 md:w-24 md:h-24 mx-auto mb-6 text-brand-text">
@@ -16,6 +18,7 @@ const services = [
     )
   },
   {
+    id: "microscope-root-canals",
     title: "Microscope\nAssessed Root\nCanals",
     icon: (
       <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-20 h-20 md:w-24 md:h-24 mx-auto mb-6 text-brand-text">
@@ -30,6 +33,7 @@ const services = [
     )
   },
   {
+    id: "full-mouth-rehab",
     title: "Full Mouth\nRehabilitation",
     icon: (
       <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-20 h-20 md:w-24 md:h-24 mx-auto mb-6 text-brand-text">
@@ -41,6 +45,7 @@ const services = [
     )
   },
   {
+    id: "invisalign",
     title: "Invisalign",
     icon: (
       <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-20 h-20 md:w-24 md:h-24 mx-auto mb-6 text-brand-text">
@@ -54,6 +59,7 @@ const services = [
     )
   },
   {
+    id: "cleanups",
     title: "Cleanups",
     icon: (
       <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-20 h-20 md:w-24 md:h-24 mx-auto mb-6 text-brand-text">
@@ -66,6 +72,7 @@ const services = [
     )
   },
   {
+    id: "dental-implants",
     title: "Dental Implants",
     icon: (
       <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-20 h-20 md:w-24 md:h-24 mx-auto mb-6 text-brand-text">
@@ -78,6 +85,7 @@ const services = [
     )
   },
   {
+    id: "teeth-whitening",
     title: "Teeth Whitening",
     icon: (
       <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-20 h-20 md:w-24 md:h-24 mx-auto mb-6 text-brand-text">
@@ -89,6 +97,7 @@ const services = [
     )
   },
   {
+    id: "pediatric-dentistry",
     title: "Pediatric\nDentistry",
     icon: (
       <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-20 h-20 md:w-24 md:h-24 mx-auto mb-6 text-brand-text">
@@ -176,15 +185,18 @@ export default function Services() {
           {/* Services Carousel */}
           <div className="flex animate-marquee w-max gap-24 pb-8 pt-4 px-4 hover:[animation-play-state:paused]">
             {duplicatedServices.map((service, index) => (
-              <div 
-                key={index} 
-                className="flex-none w-[200px] flex flex-col items-center justify-start text-center"
+              <Link 
+                key={index}
+                to={`/services/${service.id}`} 
+                className="flex-none w-[200px] flex flex-col items-center justify-start text-center hover:scale-105 transition-transform duration-300 group"
               >
-                {service.icon}
-                <h4 className="text-lg text-brand-text font-medium whitespace-pre-line leading-snug">
+                <div className="group-hover:text-brand-primary transition-colors duration-300">
+                  {service.icon}
+                </div>
+                <h4 className="text-lg text-brand-text font-medium whitespace-pre-line leading-snug group-hover:text-brand-primary-dark transition-colors duration-300">
                   {service.title}
                 </h4>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
@@ -204,15 +216,18 @@ export default function Services() {
             {[...mobileServiceGroups, ...mobileServiceGroups, ...mobileServiceGroups].map((group, groupIndex) => (
               <div key={groupIndex} className="w-[calc(100vw-2rem)] flex-shrink-0 grid grid-cols-2 grid-rows-2 gap-3">
                 {group.map((service, itemIndex) => (
-                  <div 
-                    key={itemIndex} 
-                    className="bg-white border border-brand-primary/20 rounded-2xl p-4 flex flex-col items-center justify-center text-center aspect-square shadow-sm [&>svg]:!mb-3 [&>svg]:!w-14 [&>svg]:!h-14"
+                  <Link 
+                    key={`${groupIndex}-${itemIndex}`}
+                    to={`/services/${service.id}`}
+                    className="bg-white border border-brand-primary/20 rounded-2xl p-4 flex flex-col items-center justify-center text-center aspect-square shadow-sm [&>svg]:!mb-3 [&>svg]:!w-14 [&>svg]:!h-14 hover:border-brand-primary hover:shadow-md transition-all active:scale-95"
                   >
-                    {service.icon}
+                    <div className="text-brand-text">
+                      {service.icon}
+                    </div>
                     <h4 className="text-[14px] text-brand-text font-semibold whitespace-pre-line leading-tight">
                       {service.title}
                     </h4>
-                  </div>
+                  </Link>
                 ))}
               </div>
             ))}
